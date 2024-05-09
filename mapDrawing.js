@@ -4,8 +4,8 @@ const legend = document.querySelector(".map-legend");
 const mapBounds = {
     north: -21.01147241837678,
     south: -21.29771854911285,
-    west: -47.93018084111609,
-    east: -47.43236284795203,
+    west: -48.93018084111609,
+    east: -47.53236284795203,
 }
 
 const mapProps = {
@@ -205,46 +205,36 @@ async function initMap() {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
     map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(legend);
     
-    showClickedCoordinates();
-    
+    // showClickedCoordinates();
 }
 
 function drawLines() {
-    const fluxCoordinates1 = [
-        { lat: -21.131289226375387, lng: -47.61913042607703 },
-        { lat: -20.955054683444235, lng: -47.32867937627234 },
+    const lines = [
+        lineCoordinates1 = [
+            { lat: -21.131289226375387, lng: -47.61913042607703 },
+            { lat: -20.955054683444235, lng: -47.32867937627234 },
+        ],
+        lineCoordinates2 = [
+            { lat: -21.133311819263618, lng: -47.61749177679832 },
+            { lat: -21.011552542045507, lng: -47.41786443301641 },
+        ]
     ];
 
-    const fluxCoordinates2 = [
-        { lat: -21.133311819263618, lng: -47.61749177679832 },
-        { lat: -21.011552542045507, lng: -47.41786443301641 },
-    ];
-
-    const flightPath1 = new google.maps.Polyline({
-        path: fluxCoordinates1,
-        geodesic: true,
-        strokeColor: "#FF0000",
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-    });
-    const flightPath2 = new google.maps.Polyline({
-        path: fluxCoordinates2,
-        geodesic: true,
-        strokeColor: "#FF0000",
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-    });
-
-    flightPath1.setMap(map);
-    flightPath2.setMap(map);
+    for (let i = 0; i < lines.length; i++) {
+        
+        const flightPath = new google.maps.Polyline({
+            path: lines[i],
+            geodesic: true,
+            strokeColor: "#000000",
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+        });
+        flightPath.setMap(map);
+    }
 }
 
 function showClickedCoordinates() {
-    let infoWindow = new google.maps.InfoWindow({
-        content: "Click the map to get Lat/Lng!",
-        position: mapProps.center,
-    });
-    infoWindow.open(map);
+    let infoWindow = new google.maps.InfoWindow();
 
     google.maps.event.addListener(map, 'click', (mapsMouseEvent) => {
         infoWindow.close();

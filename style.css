@@ -14,7 +14,7 @@ html, body {
 .map-legend {
     background-image: url('/assets/TexturaPapelVelho.jpg');
     padding-left: 10px;
-    width: 350px;
+    width: 300px;
     height: 250px;
     border-radius: 10px;
     outline: 2px solid #000000;
